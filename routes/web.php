@@ -33,10 +33,15 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::resource('surat-masuk', SuratMasukController::class);
+    Route::group(['prefix' => 'surat-masuk'], function () {
+        Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
+        Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
+        Route::put('/update/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
+        Route::delete('/delete/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
+    });
+
     Route::resource('surat-keluar', SuratKeluarController::class);
     Route::resource('disposisi', DisposisiController::class);
-    Route::resource('users', UserController::class);
 });
 
 require __DIR__ . '/auth.php';

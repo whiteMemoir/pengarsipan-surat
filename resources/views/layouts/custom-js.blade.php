@@ -99,8 +99,8 @@
             onDeleted
         }) {
             swal({
-                title: "Are you sure?",
-                text: "This will delete the data.",
+                title: "Yakin ingin menghapus data?",
+                text: "Data tidak dapat dikembalikan!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -113,7 +113,7 @@
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                         },
                         success: function() {
-                            showToast.success("Data deleted successfully!");
+                            showToast.success("Data berhasil dihapus!");
                             if (onDeleted) onDeleted();
                         },
                         error: function() {
@@ -164,7 +164,7 @@
                         if (res.status == 'success') {
                             $(`#${modalId}`).modal("hide");
                             swal.close();
-                            showToast.success("Data saved successfully!");
+                            showToast.success("Data berhasil disimpan!");
                             if (onSaved) onSaved();
                         } else {
                             swal({
@@ -251,7 +251,7 @@
                         if (res.status == 'success') {
                             $(`#${modalId}`).modal("hide");
                             swal.close();
-                            showToast.success("Data saved successfully!");
+                            showToast.success("Data berhasil disimpan!");
                             if (onSaved) onSaved();
                         } else {
                             swal({

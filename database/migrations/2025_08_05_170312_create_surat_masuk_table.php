@@ -17,10 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('dibuat_oleh');        // FK ke users (yang input)
             $table->string('no_surat', 30);
             $table->date('tanggal');
-            $table->string('perihal', 120);
+            $table->string('perihal', 255);
             $table->string('pengirim', 80);
             $table->text('alamat_pengirim');
-            $table->string('file_surat', 120);
+            $table->string('file_surat', 255);
             $table->enum('status', ['baru', 'dibaca', 'didisposisi'])->default('baru');
             $table->timestamp('waktu_dibaca')->nullable();
             $table->timestamp('waktu_dibuat')->nullable();
