@@ -25,7 +25,7 @@
         {{-- Surat Masuk --}}
         <li class="menu-item {{ request()->routeIs('surat-masuk.*') ? 'active open' : '' }}">
             <a href="{{ route('surat-masuk.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-envelope-in"></i>
+                <i class="menu-icon tf-icons bx bx-envelope"></i>
                 <div>Surat Masuk</div>
             </a>
         </li>

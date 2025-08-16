@@ -21,7 +21,15 @@
     <link rel="stylesheet" href="{{ asset('sneat/css/demo.css') }}" />
     <link rel="stylesheet" href="{{ asset('sneat/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('sneat/vendor/libs/sweetalert2/sweetalert2.min.css') }}" />
-    @stack('style')
+
+    <link href="{{ asset('sneat/css/toastr.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('sneat/css/select2.min.css') }}" rel="stylesheet" />
+
+    <!-- Datatable -->
+    <link href="{{ asset('sneat/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
+    @yield('style')
 
     <script src="{{ asset('sneat/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('sneat/js/config.js') }}"></script>
@@ -62,28 +70,119 @@
     <script src="{{ asset('sneat/vendor/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('sneat/vendor/libs/masonry/masonry.js') }}"></script>
     <script src="{{ asset('sneat/js/main.js') }}"></script>
-    @stack('script')
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: '{{ session('success') }}'
-            })
-        </script>
-    @elseif(session('error'))
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: '{{ session('error') }}'
-            })
-        </script>
-    @elseif(session('info'))
-        <script>
-            Swal.fire({
-                icon: 'info',
-                title: '{{ session('info') }}'
-            })
-        </script>
-    @endif
+
+
+    <script src="{{ asset('sneat/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('sneat/js/dataTables.bootstrap4.min.js') }}"></script>
+
+    <script src="{{ asset('sneat/js/select2.min.js') }}"></script>
+    <script src="{{ asset('sneat/js/toastr.min.js') }}"></script>
+
+    @include('js.custom-js')
+
+    <script type="text/javascript">
+        toastr.options = {
+            "closeButton": true, // tampilkan tombol close (X)
+            "progressBar": true, // tampilkan progress bar
+            "timeOut": "5000", // durasi tampil (ms)
+            "extendedTimeOut": "1000", // waktu tambahan saat mouse hover
+            "positionClass": "toast-bottom-center" // posisi notifikasi
+        };
+
+        @if (session()->has('success'))
+            toastr.success("{{ session('success') }}", "Berhasil");
+        @endif
+
+        @if (session()->has('error'))
+            toastr.error("{{ session('error') }}", "Gagal");
+        @endif
+
+        @if (session()->has('warning'))
+            toastr.warning("{{ session('warning') }}", "Peringatan");
+        @endif
+
+        window.showToast = {
+            success: function(message, title = 'Success', reload = false) {
+                toastr.options = getBaseToastrOptions(reload);
+                toastr.success(message, title);
+            },
+            warning: function(message, title = 'Warning', reload = false) {
+                toastr.options = getBaseToastrOptions(reload);
+                toastr.warning(message, title);
+            },
+            error: function(message, title = 'Error', reload = false) {
+                toastr.options = getBaseToastrOptions(reload);
+                toastr.error(message, title);
+            }
+        };
+
+        function getBaseToastrOptions(reload) {
+            return {
+                timeOut: 5000,
+                closeButton: true,
+                debug: false,
+                newestOnTop: true,
+                progressBar: true,
+                positionClass: "toast-bottom-right",
+                preventDuplicates: true,
+                onclick: null,
+                showDuration: "300",
+                hideDuration: "1000",
+                extendedTimeOut: "1000",
+                showEasing: "swing",
+                hideEasing: "linear",
+                showMethod: "fadeIn",
+                hideMethod: "fadeOut",
+                tapToDismiss: false,
+                onHidden: reload ? function() {
+                    location.reload();
+                } : null
+            };
+        }
+
+        function initDataTables() {
+            if (!$.fn.DataTable.isDataTable('.datatable')) {
+                $('.datatable').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    info: true
+                });
+            }
+
+            if (!$.fn.DataTable.isDataTable('.datatable2')) {
+                $('.datatable2').DataTable({
+                    paging: true,
+                    searching: true,
+                    ordering: true,
+                    info: true
+                })
+            }
+        }
+
+        async function getData(url) {
+            let res = await fetch(url)
+                .then((res) => res.json())
+                .catch((err) => console.log(err));
+
+            return res;
+        }
+
+        $('.select2').select2()
+
+         // add required and optional label
+        $("label[for]").each(function() {
+            const inputId = $(this).attr("for");
+            const inputEl = $("#" + inputId);
+
+            if (inputEl.prop("required")) {
+                $(this).addClass("required-label");
+            } else {
+                $(this).addClass("optional-label");
+            }
+        });
+    </script>
+
+    @yield('js')
 </body>
 </html>
