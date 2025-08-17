@@ -24,6 +24,12 @@
                         </div>
 
                         <div class="form-group mb-3">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username"
+                                value="{{ auth()->user()->username }}" required>
+                        </div>
+
+                        <div class="form-group mb-3">
                             <label for="current_password">Password Sekarang</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="current_password" name="current_password"

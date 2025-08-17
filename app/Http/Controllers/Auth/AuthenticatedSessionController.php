@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -22,13 +24,28 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
+        $credentials = $request->only('username', 'password');
+        $login = $credentials['username']; // input bisa email atau username
+        $password = $credentials['password'];
 
-        $request->session()->regenerate();
+        // cari user berdasarkan email atau username
+        $user = User::where('email', $login)
+            ->orWhere('username', $login)
+            ->first();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if ($user && Hash::check($password, $user->password)) {
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
+
+        // kalau gagal login
+        return back()->withErrors([
+            'username' => 'Username atau Email dan Password tidak sesuai.',
+        ])->withInput();
     }
 
     /**
