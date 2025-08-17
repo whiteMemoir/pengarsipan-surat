@@ -12,12 +12,12 @@ class SuratKeluar extends Model
 
     protected $table = 'surat_keluar';
 
-    public function dibuatOleh()
+    public function fromUser()
     {
         return $this->belongsTo(User::class, 'dibuat_oleh');
     }
 
-    public function mengetahui()
+    public function knowUser()
     {
         return $this->belongsTo(User::class, 'mengetahui');
     }

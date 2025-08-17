@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SuratKeluar;
 use App\Models\SuratMasuk;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class SuratMasukController extends Controller
@@ -16,10 +18,33 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $data['suratMasuk'] = SuratMasuk::with('kepada')->get();
+        $suratMasuk = SuratMasuk::with(['toUser', 'fromUser']);
+
+        if (Auth::user()->level_user == 'kepala_bagian')
+        {
+            $suratMasuk->where('kepada', Auth::user()->id);
+        }
+        else
+        {
+            $suratMasuk->where('dibuat_oleh', Auth::user()->id);
+        }
+
+        $data['suratMasuk'] = $suratMasuk->orderBy('created_at', 'desc')->get();
         $data['users'] = User::where('level_user', '!=', 'super_admin')->get();
 
         return view('pages.surat-masuk.index', $data);
+    }
+
+    public function disposisi($id)
+    {
+        $suratMasuk = SuratMasuk::findOrFail($id);
+
+        $suratMasuk->status = 'dibaca';
+        $suratMasuk->save();
+
+        $suratMasuk = $suratMasuk->load(['toUser', 'fromUser']);
+
+        return view('pages.surat-masuk.disposisi', compact('suratMasuk'));
     }
 
     /**
@@ -37,7 +62,7 @@ class SuratMasukController extends Controller
             $suratMasuk->pengirim = $request->input('pengirim');
             $suratMasuk->alamat_pengirim = $request->input('alamat_pengirim');
             $suratMasuk->file_surat = $this->getPathFileSurat($request);
-            $suratMasuk->status = $request->input('status');
+            $suratMasuk->status = 'baru';
             $suratMasuk->save();
 
             return response()->json([
@@ -59,37 +84,6 @@ class SuratMasukController extends Controller
     public function show(string $id)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        try {
-            $suratMasuk = SuratMasuk::findOrFail($id);
-            $suratMasuk->kepada = $request->input('kepada');
-            $suratMasuk->dibuat_oleh = Auth::user()->id;
-            $suratMasuk->no_surat = $this->generateNoSurat();
-            $suratMasuk->tanggal = $request->input('tanggal');
-            $suratMasuk->perihal = $request->input('perihal');
-            $suratMasuk->pengirim = $request->input('pengirim');
-            $suratMasuk->alamat_pengirim = $request->input('alamat_pengirim');
-            $suratMasuk->file_surat = $this->getPathFileSurat($request);
-            $suratMasuk->status = $request->input('status');
-            $suratMasuk->save();
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Berhasil menyimpan data'
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Gagal menyimpan data',
-                'error' => $e->getMessage()
-            ]);
-        }
     }
 
     /**

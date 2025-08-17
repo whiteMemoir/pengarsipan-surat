@@ -42,7 +42,8 @@
             font-size: 18px;
         }
 
-        .form-control {
+        input.form-control,
+        select.form-control {
             min-height: 33px !important;
             height: 33px !important;
         }
@@ -247,7 +248,7 @@
     ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright &copy; {{ date('Y') }} All rights reserved - Supported by PT. Anugrah Bintang Cendana
+                <p>Copyright &copy; {{ date('Y') }} All rights reserved
                 </p>
             </div>
         </div>

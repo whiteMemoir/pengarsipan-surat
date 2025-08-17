@@ -12,14 +12,14 @@ class SuratMasuk extends Model
 
     protected $table = 'surat_masuk';
 
-    public function dibuatOleh()
+    public function fromUser()
     {
         return $this->belongsTo(User::class, 'dibuat_oleh');
     }
 
-    public function kepada()
+    public function toUser()
     {
-        return $this->belongsTo(User::class, 'kepada');
+        return $this->belongsTo(User::class, 'kepada', 'id');
     }
 
     public function disposisi()

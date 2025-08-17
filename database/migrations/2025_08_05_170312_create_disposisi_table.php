@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('disposisi', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_surat');
+            $table->integer('kepada');
+            $table->integer('oleh');
+            $table->text('isi_disposisi');
+            $table->enum('status_disposisi', ['belum', 'sudah'])->default('belum');
+            $table->timestamp('waktu_disposisi')->nullable();
+            $table->timestamp('waktu_dibaca')->nullable();
             $table->timestamps();
         });
     }

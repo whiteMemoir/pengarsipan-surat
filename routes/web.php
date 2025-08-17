@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuratMasukController;
 use App\Http\Controllers\SuratKeluarController;
 use App\Http\Controllers\DisposisiController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -35,13 +36,26 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'surat-masuk'], function () {
         Route::get('/', [SuratMasukController::class, 'index'])->name('surat-masuk.index');
+        Route::get('/disposisi/{id}', [SuratMasukController::class, 'disposisi'])->name('surat-masuk.disposisi');
         Route::post('/store', [SuratMasukController::class, 'store'])->name('surat-masuk.store');
         Route::put('/update/{id}', [SuratMasukController::class, 'update'])->name('surat-masuk.update');
         Route::delete('/delete/{id}', [SuratMasukController::class, 'destroy'])->name('surat-masuk.delete');
     });
 
-    Route::resource('surat-keluar', SuratKeluarController::class);
-    Route::resource('disposisi', DisposisiController::class);
+    Route::group(['prefix' => 'surat-keluar'], function () {
+        Route::get('/', [SuratKeluarController::class, 'index'])->name('surat-keluar.index');
+        Route::get('/disposisi/{id}', [SuratKeluarController::class, 'disposisi'])->name('surat-keluar.disposisi');
+        Route::post('/store', [SuratKeluarController::class, 'store'])->name('surat-keluar.store');
+        Route::put('/update/{id}', [SuratKeluarController::class, 'update'])->name('surat-keluar.update');
+        Route::delete('/delete/{id}', [SuratKeluarController::class, 'destroy'])->name('surat-keluar.delete');
+    });
+
+    Route::group(['prefix' => 'disposisi'], function () {
+        Route::post('/store', [DisposisiController::class, 'store'])->name('disposisi.store');
+    });
+
+    Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
+
 });
 
 require __DIR__ . '/auth.php';

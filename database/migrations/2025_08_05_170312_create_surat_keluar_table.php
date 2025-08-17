@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('perihal', 120);
             $table->string('penerima', 120);
             $table->text('alamat_penerima');
-            $table->string('file_surat', 120);
+            $table->string('file_surat', 255);
             $table->enum('status', ['baru', 'dibaca', 'selesai'])->default('baru');
             $table->timestamp('waktu_dibaca')->nullable();
             $table->timestamp('waktu_dibuat')->nullable();
