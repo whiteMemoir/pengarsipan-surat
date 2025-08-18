@@ -22,7 +22,7 @@
                                 <input type="hidden" name="id_surat" value="{{ $suratKeluar->id }}">
                                 <div class="form row mb-3">
                                     <div class="col-12 text-center">
-                                        <a href="{{ asset($suratKeluar->file_surat) }}" class="btn btn-primary btn-sm" target="_blank">Link Lampiran</a>
+                                        <a href="{{ asset('storage/'.$suratKeluar->file_surat) }}" class="btn btn-primary btn-sm" target="_blank">Link Lampiran</a>
                                     </div>
                                 </div>
                                 <div class="form row mb-3">
