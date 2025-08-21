@@ -44,16 +44,6 @@
                                     <td>{{ $surat->perihal }}</td>
                                     <td>{{ strtoupper($surat->status) }}</td>
                                     <td align="center">
-                                        @if (auth()->user()->level_user == 'kepala_bagian')
-                                            {{-- tombol baca --}}
-                                            <a href="javascript:void(0)" class="btn btn-primary btn-sm baca-btn"
-                                                data-id="{{ $surat->id }}" data-tanggal="{{ $surat->tanggal }}"
-                                                data-pengirim="{{ $surat->pengirim }}" data-kepada="{{ $surat->kepada }}"
-                                                data-perihal="{{ $surat->perihal }}" data-status="{{ $surat->status }}"
-                                                data-file="{{ asset('storage/' . $surat->file_surat) }}">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        @endif
                                         @if ($surat->status == 'baru' && auth()->user()->level_user != 'kepala_bagian')
                                             <a href="javascript:void(0)" class="btn btn-danger btn-sm delete-btn"
                                                 data-id="{{ $surat->id }}" title="Batal">
