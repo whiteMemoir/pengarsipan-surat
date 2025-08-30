@@ -5,12 +5,12 @@
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <h4 class="mb-3"><i class="fa fa-file"></i> Laporan</h4>
+                    <h4 class="mb-3"><i class="fa fa-file"></i> Laporan Surat {{ request('tipe') == 'masuk' ? 'Masuk' : 'Keluar' }}</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <form action="{{ url()->current() }}" method="GET" class="form-inline">
                         <select name="tipe" class="form-control mr-2">
-                            <option value="">-- Semua Surat --</option>
+                            <option value="" disabled selected>Pilih Tipe Surat</option>
                             <option value="masuk" {{ request('tipe') == 'masuk' ? 'selected' : '' }}>Surat Masuk</option>
                             <option value="keluar" {{ request('tipe') == 'keluar' ? 'selected' : '' }}>Surat Keluar</option>
                         </select>
@@ -20,9 +20,13 @@
                         <input type="date" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}"
                             class="form-control mr-2">
 
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary mr-2">
                             <i class="fa fa-filter"></i> Filter
                         </button>
+
+                        <a href="{{ url()->current() }}/print?tipe={{ request('tipe') }}&tanggal_mulai={{ request('tanggal_mulai') }}&tanggal_selesai={{ request('tanggal_selesai') }}" target="_blank" class="btn btn-info">
+                            <i class="fa fa-print"></i> Print
+                        </a>
                     </form>
                 </div>
             </div>

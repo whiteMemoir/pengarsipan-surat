@@ -25,13 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware(['superadmin'])->group(function () {
-        Route::group(['prefix' => 'users'], function () {
-            Route::get('/', [UserController::class, 'index'])->name('users.index');
-            Route::post('/store', [UserController::class, 'store'])->name('users.store');
-            Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
-            Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
-        });
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('users.delete');
     });
 
     Route::group(['prefix' => 'surat-masuk'], function () {
@@ -54,7 +52,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [DisposisiController::class, 'store'])->name('disposisi.store');
     });
 
-    Route::get('laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/print', [LaporanController::class, 'print'])->name('laporan.print');
 
 });
 

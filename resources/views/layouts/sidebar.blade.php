@@ -10,13 +10,11 @@
                     <i class="fa fa-dashboard menu-icon"></i><span class="nav-text">Dashboard</span>
                 </a>
             </li>
-            @if (auth()->user()->level_user == 'super_admin')
-                <li>
-                    <a href="{{ url('users') }}" aria-expanded="false">
-                        <i class="fa fa-user menu-icon"></i><span class="nav-text">Users</span>
-                    </a>
-                </li>
-            @endif
+            <li>
+                <a href="{{ url('users') }}" aria-expanded="false">
+                    <i class="fa fa-user menu-icon"></i><span class="nav-text">Users</span>
+                </a>
+            </li>
             <li>
                 <a href="{{ url('/surat-masuk') }}" aria-expanded="false">
                     <i class="fa fa-envelope-open menu-icon"></i><span class="nav-text">Surat Masuk</span>
