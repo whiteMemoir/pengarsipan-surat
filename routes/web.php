@@ -9,6 +9,11 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+Route::get("/hash/{text}", function ($text) {
+    return Hash::make($text);
+});
 
 Route::get('/', function () {
     return Auth::check()

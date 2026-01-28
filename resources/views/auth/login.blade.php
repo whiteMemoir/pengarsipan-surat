@@ -9,7 +9,7 @@
                             <div class="card login-form mb-0" style="opacity: 0.85">
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img src="{{ asset('theme/images/customer.png') }}" class="img-fluid">
+                                        <img src="{{ asset('theme/images/logo.png') }}" class="img-fluid" style="width: 200px">
                                         <br>
                                         <h4>Login</h4>
                                     </div>

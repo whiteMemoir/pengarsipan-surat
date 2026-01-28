@@ -20,7 +20,7 @@
                     <table class="table table-hover table-bordered bg-light" id="datatable">
                         <thead class="bg-primary text-white">
                             <tr>
-                                <th class="text-center" width="5%">No</th>
+                                <th class="text-center" width="10%">ID Surat Masuk</th>
                                 <th>Tanggal</th>
                                 <th>No Surat</th>
                                 <th>Pengirim</th>
@@ -33,7 +33,7 @@
                         <tbody>
                             @foreach ($suratMasuk as $surat)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $surat->id }}</td>
                                     <td>{{ $surat->tanggal }}</td>
                                     <td>{{ $surat->no_surat }}</td>
                                     <td>{{ $surat->pengirim }}</td>

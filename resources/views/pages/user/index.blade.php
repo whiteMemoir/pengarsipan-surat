@@ -18,7 +18,7 @@
                     <table class="table table-hover table-bordered bg-light" id="datatable">
                         <thead class="bg-primary text-white">
                             <tr>
-                                <th class="text-center" width="5%">No</th>
+                                <th width="8%" class="text-center">ID User</th>
                                 <th>Nama</th>
                                 <th>Username</th>
                                 <th>Bagian</th>
@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $user->id }}</td>
                                     <td>{{ $user->nama }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>{{ $user->bagian->nama_bagian ?? '' }}</td>

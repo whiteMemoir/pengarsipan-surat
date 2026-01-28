@@ -21,7 +21,7 @@
                     <table class="table table-hover table-bordered bg-light" id="datatable">
                         <thead class="bg-primary text-white">
                             <tr>
-                                <th class="text-center" width="5%">No</th>
+                                <th class="text-center" width="10%">ID Surat Keluar</th>
                                 <th>Tanggal</th>
                                 <th>Mengetahui</th>
                                 <th>No Surat</th>
@@ -35,7 +35,7 @@
                         <tbody>
                             @foreach ($suratKeluar as $surat)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-center">{{ $surat->id }}</td>
                                     <td>{{ $surat->tanggal }}</td>
                                     <td>{{ $surat->knowUser->nama ?? '' }}</td>
                                     <td>{{ $surat->no_surat }}</td>

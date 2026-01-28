@@ -196,7 +196,10 @@
             Nav header start
         ***********************************-->
         <div class="nav-header text-center pb-2"
-            style="background-image: url({{ asset('images/logo.png') }}); background-size: cover; background-repeat: no-repeat; background-position: center">
+            style="background-image: url({{ asset('theme/images/logo.png') }});
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center">
             <div class="brand-logo">
                 {{-- <a href="{{ url('/') }}"> --}}
                 {{-- <span class="brand-title">

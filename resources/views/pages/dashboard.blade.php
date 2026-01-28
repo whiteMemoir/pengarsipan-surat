@@ -3,44 +3,57 @@
 @section('content-app')
     <div class="row">
         <div class="col-12">
-            <h4><i class="fa fa-home"></i> Dashboard</h4>
+            <h4><i class="fa fa-home"></i> Beranda</h4>
         </div>
     </div>
     <div id="originalDashboardContainer">
-        <div class="row" id="contentBox">
-            <div class="col-md-3 col-sm-6">
-                <div class="card gradient-1 bg-info shadow-sm">
-                    <div class="card-body text-center">
-                        <h6 class="text-uppercase text-white">
-                            <i class="fa fa-envelope"></i> SURAT MASUK
-                        </h6>
-                        <h2 class="text-white">{{ $suratMasukCount }}</h2>
-                    </div>
-                </div>
+        <div class="row justify-content-center text-center mb-5">
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="{{ url('surat-masuk') }}" class="btn btn-outline-dark w-100 py-4">
+                    <div class="h1 fw-bold">{{ $suratMasukCount }}</div>
+                    <div class="text-uppercase">Surat Masuk</div>
+                </a>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card gradient-2 bg-success shadow-sm">
-                    <div class="card-body text-center">
-                        <h6 class="text-uppercase text-white">
-                            <i class="fa fa-envelope-open"></i> SURAT KELUAR
-                        </h6>
-                        <h2 class="text-white">{{ $suratKeluarCount }}</h2>
-                    </div>
-                </div>
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="{{ url('surat-keluar') }}" class="btn btn-outline-dark w-100 py-4">
+                    <div class="h1 fw-bold">{{ $suratKeluarCount }}</div>
+                    <div class="text-uppercase">Surat Keluar</div>
+                </a>
             </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="card gradient-3 bg-success shadow-sm">
-                    <div class="card-body text-center">
-                        <h6 class="text-uppercase text-white">
-                            <i class="fa fa-paper-plane"></i> DISPOSISI
-                        </h6>
-                        <h2 class="text-white">{{ $disposisiCount }}</h2>
-                    </div>
-                </div>
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="{{ url('surat-masuk') }}" class="btn btn-outline-dark w-100 py-4">
+                    <div class="h1 fw-bold">{{ $userCount }}</div>
+                    <div class="text-uppercase">User</div>
+                </a>
+            </div>
+
+            <div class="col-md-3 col-6 mb-3">
+                <a href="{{ url('laporan') }}" class="btn btn-outline-dark w-100 py-4">
+                    <div class="text-uppercase h1 fw-bold" style="padding: 10px 0px">Laporan</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center my-5">
+                <h1 class="fw-bold text-uppercase">
+                    Sistem Pengarsipan<br>
+                    Surat Menyurat
+                </h1>
             </div>
         </div>
 
 
+        <div class="row">
+            <div class="col-12 text-center mt-5">
+                <h5 class="text-uppercase h2 fw-bold">
+                    Selamat Datang {{ auth()->user()->nama }}
+                </h5>
+            </div>
+        </div>
     </div>
 @endsection
 

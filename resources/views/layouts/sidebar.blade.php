@@ -7,7 +7,7 @@
             <li class="nav-label">SEBAGAI {{ str_replace('_', ' ', auth()->user()->level_user) }}</li>
             <li>
                 <a href="{{ url('/') }}" aria-expanded="false">
-                    <i class="fa fa-dashboard menu-icon"></i><span class="nav-text">Dashboard</span>
+                    <i class="fa fa-dashboard menu-icon"></i><span class="nav-text">Beranda</span>
                 </a>
             </li>
             <li>

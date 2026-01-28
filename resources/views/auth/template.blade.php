@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>@yield('title', 'Laboratory Information System')</title>
+    <title>@yield('title', 'PENGARSIPAN SURAT')</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/logo.png') }}">
     <link href="{{ asset('theme') }}/css/style.css" rel="stylesheet">

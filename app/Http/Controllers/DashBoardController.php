@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SuratMasuk;
 use App\Models\SuratKeluar;
 use App\Models\Disposisi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,6 +16,7 @@ class DashboardController extends Controller
             'suratMasukCount' => SuratMasuk::count(),
             'suratKeluarCount' => SuratKeluar::count(),
             'disposisiCount'   => Disposisi::count(),
+            'userCount'        => User::count()
         ]);
     }
 }
